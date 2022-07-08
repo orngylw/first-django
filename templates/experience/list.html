@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}
+    <title> Experience </title>
+{% endblock title %}
+{% block content %}
+<div class="content">
+    <p style = text-align:right;><a class="button is-link is-light is-outlined is-rounded"  style=text-align:right; href="/exp/new/">Create</a></p>
+    <h1>Experience</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Job Position</th>
+                <th>Year</th>
+            </tr>
+        </thead>
+    {% for exp in experiences %}
+            <tbody>
+                <th><a href="/exp/{{ exp.id }}">{{ exp.job }}</a></th>
+                <th>{{ exp.year }}</th>
+            </tbody>
+    {% endfor %}
+    </table>
+    
+<br /><br />
+    <a class="button is-link is-light is-outlined is-rounded" href="/"> Homepage </a>
+    <br />
+    <br />
+    <a class="button is-link is-light is-outlined is-rounded" href="/courses"> Courses </a>
+    <br />
+    <br />
+    <a class="button is-link is-light is-outlined is-rounded" href="/praise"> Praise </a>
+</div>
+{% endblock content %}

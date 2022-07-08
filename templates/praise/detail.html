@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}
+    <title> Detail </title>
+{% endblock title %}
+{% block content %}
+    <h1>Praise Detail: {{ object.name }}</h1>
+    <p style="font-weight: bolder;">악기구성: {{ object.instruments }}</p>
+    <p><b>코드 및 키업:</b> {{ object.chord }} (키업: {{ object.key_up }})</p>
+    <p><b>날짜: </b>{{ object.date}} </p>
+    <p><b>Note: </b>{{ object.note }}</p>
+    <p>악보 다운로드</p>
+    <p><a href="/praise"> Back to list </a></p>
+{% endblock content %}

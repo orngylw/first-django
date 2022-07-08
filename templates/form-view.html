@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}
+    <title> Form </title>
+{% endblock title %}
+{% block content %}
+<!-- action이랑 method, csrf token 적용법을 잘 모르겠음 -->
+<form method="get">{% csrf_token %} 
+    <label for="fname">First name:</label><br>
+    <input type="text" id="fname" name="fname" placholder="text"><br>
+    <label for="lname">Last name:</label><br>
+    <input type="text" id="lname" name="lname"><br>
+    <input type="submit" value="Submit"><br>
+    <br />
+
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" placeholder="username" autofocus required>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+    <input type="submit">
+</form>
+{% endblock content %}

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}
+    <title> Detail </title>
+{% endblock title %}
+{% block content %}
+    <h1>Experience Detail: {{ object.job }}</h1>
+    <p><b>{{ object.job }} {{ object.year }}</b></p>
+    <p>{{ object.desc }}</p>
+    <p><a href="/exp"> Back to list </a></p>
+{% endblock content %}

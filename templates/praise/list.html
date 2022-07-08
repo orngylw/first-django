@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}
+    <title> Praise </title>
+{% endblock title %}
+
+{% block content %}
+<div class="content">
+    <p style = text-align:right;>
+      <a class="button is-link is-light is-outlined is-rounded"  style=text-align:right; href="/praise/new/">Create</a>
+    </p>
+    <h1 style="text-align: center">찬양곡 모음</h1>
+    {% if not month %}
+    <div class="dropdown is-hoverable">
+        <div class="dropdown-trigger">
+          <button class="button" aria-haspopup="true" aria-controls="dropdown-menu" style="margin-left:650px;">
+            <a><span>2022년 찬양곡 모음{% if praises.exists %}<span style="margin-left: 5px;">({{ praises.count }})</span>{% endif %}</a></span>
+            <span class="icon is-small">
+              <i class="fas fa-angle-down" aria-hidden="true"></i>
+            </span>
+          </button>
+        </div>
+        <div class="dropdown-menu" id="dropdown-menu" role="menu" style="margin-left:650px;">
+          <div class="dropdown-content" style="text-align:center;">
+            {% for praise_group in praises %}
+            <a href="/praise/list/{{ praise_group.date__month }}/" class="btn btn-success btn-sm">{{ praise_group.date__month }} 월</a>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% else %}
+    <button class="button is-link" aria-haspopup="true" aria-controls="dropdown-menu" style="margin-left:45%;">{{ month }}월 찬양곡 모음{% if praises.exists %}<span style="margin-left: 5px;">({{ praises.count }})</span>{% endif %}</button>
+    <a style="margin-left:15px;" href="/praise">Back to list</a>
+    <div class="content" style="display: block;">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>날짜</th>
+                    <th>곡명</th>
+                    <th>코드</th>
+                </tr>
+            </thead>
+        {% for praise in praises %}
+                <tbody>
+                    <th>{{ praise.date }}</th>
+                    <th><a href="/praise/{{ praise.id }}">{{ praise.name }}</a></th>
+                    <th>{{ praise.chord }}</th>
+                </tbody>
+        {% endfor %}
+        </table>
+        <a href="/praise">Back to list</a>
+    </div>
+    {% endif %}
+
+    <br />
+    <br />
+    <br />
+    <a class="button is-link is-light is-outlined is-rounded" style="margin-left:45%;" href="/"> Homepage </a>
+    <br />
+    <br />
+    <a class="button is-link is-light is-outlined is-rounded" style="margin-left:45%;"" href="/courses"> Courses </a>
+    <br />
+    <br />
+    <a class="button is-link is-light is-outlined is-rounded" style="margin-left:45%;" href="/exp"> Experience </a>
+</div>
+{% endblock content %}

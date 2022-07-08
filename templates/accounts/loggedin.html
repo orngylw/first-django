@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}
+    <title> Logged in </title>
+{% endblock title %}
+{% block content %}
+
+<p>Hello, {{ request.user.username }}! You're already logged in this page. </p>
+<br />
+    <a href="/">Back to Home</a>
+
+{% endblock content %}

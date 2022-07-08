@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}
+    <title> Detail </title>
+{% endblock title %}
+{% block content %}
+    <h1>Course Detail: {{ object.subject }}</h1>
+    <p><b>{{ object.course }} {{ object.subject }} {{ object.grade }} (Credit: {{ object.credit }})</b></p>
+    <p><b>Instructor:</b> {{ object.instructor }}</p>
+    <p><b>Location:</b> {{ object.location }}</p>
+    <p><b>Semester:</b> {{ object.semester }} {{ object.year }}</p>
+    <p><a href="/courses"> Back to list </a></p>
+{% endblock content %}

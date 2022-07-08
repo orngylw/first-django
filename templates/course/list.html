@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}
+    <title> Courses Taken </title>
+{% endblock title %}
+{% block content %}
+    <div class="content">
+    <p style = text-align:right;><a class="button is-link is-light is-outlined is-rounded"  style=text-align:right; href="/courses/new/">Create</a></p>
+    <h1>Junho's Courses Taken at FSU</h1>
+    <h2>Courses Taken</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Course #</th>
+                <th>Course Name</th>
+                <th>Grade</th>
+            </tr>
+        </thead>
+    {% for course in courses %}
+            <tbody>
+                <th><a href="/courses/{{ course.id }}">{{ course.course }}</a></th>
+                <th>{{ course.subject }}</th>
+                <th>{{ course.grade }}</th>
+            </tbody>
+    {% endfor %}
+    </table>
+    <br /><br />
+    <a class="button is-link is-light is-outlined is-rounded" href="/"> Homepage </a>
+    <br /><br />
+    <a class="button is-link is-light is-outlined is-rounded" href="/exp"> Experiences </a>
+    <br /><br />
+    <a class="button is-link is-light is-outlined is-rounded" href="/praise"> Praise </a>
+    </div>
+{% endblock content %}

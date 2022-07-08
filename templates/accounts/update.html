@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}
+    <title> User Profile Change </title>
+{% endblock title %}
+{% block content %}
+<form class="box" method="post">{% csrf_token %}
+
+    <label>Username:</label>
+    {{ form.username }}
+
+    <label>First name:</label>
+    {{ form.first_name }}
+    <label>Last name:</label>
+    {{ form.last_name }}
+    <label>Email address:</label>
+    {{ form.email }}
+
+    <br />
+    <button class="button is-link">Save and continue editing</button>
+    <br />
+    <a href="/">Back to Home</a>
+</form>
+
+{% endblock content %}

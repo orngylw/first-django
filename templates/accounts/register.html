@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}
+    <title> User Register </title>
+{% endblock title %}
+{% block content %}
+<form class="box" action="/accounts/register/" method="post">{% csrf_token %} 
+    {{ form }}
+    <!-- <div class="field">
+        <label class="label" for="username">Username:</label><br>
+        <div class="control">
+        <input class="input" type="text" name="username"><br>
+        </div>
+    </div>
+    <div class="field">
+        <label class="label" for="password">Password:</label><br>
+        <div class="contrl">
+        <input class="input" type="password" name="password"><br>
+        </div>
+    </div>
+
+    
+    <br />
+    <br /> -->
+    <br />
+    <button class="button is-link">Register</button>
+    <br />
+    <a href="/">Back to Home</a>
+</form>
+
+
+
+{% endblock content %}
