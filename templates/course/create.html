@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load crispy_forms_filters %}
+
 {% block title %}
     <title> Create a Course </title>
 {% endblock title %}
@@ -7,7 +9,7 @@
 
 {% if not created %}
 <form action="/courses/new/" method="post">{% csrf_token %} 
-    {{ form.as_p }}
+    {{ form | crispy }}
     <!-- <label for="course">Course number:</label><br>
     <input type="text" id="course" name="course" placeholder="ex) SED 5346"><br>
     <label for="subject">Course name:</label><br>
@@ -17,11 +19,11 @@
     <br /> -->
     <input type="submit" value="Submit"><br>
     <br />
-    <a href="/courses/">Back to list</a>
+    <a href="{% url 'courses:list' %}">Back to list</a>
 </form>
 {% else %}
 <p>your input is submitted</p>
-<p><a href="/courses/{{ obj.id }}">{{ obj.course }} {{ obj.subject }} {{ obj.location }}</a></p>
+<p><a href="{% url 'courses:detail' obj.id %}">{{ obj.course }} {{ obj.subject }} {{ obj.location }}</a></p>
 {% endif %}
 {% endblock content %}
 

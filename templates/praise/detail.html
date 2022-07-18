@@ -9,5 +9,5 @@
     <p><b>날짜: </b>{{ object.date}} </p>
     <p><b>Note: </b>{{ object.note }}</p>
     <p>악보 다운로드</p>
-    <p><a href="/praise"> Back to list </a></p>
+    <p><a href="{% url 'praises:list' %}"> Back to list </a></p>
 {% endblock content %}

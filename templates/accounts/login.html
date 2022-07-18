@@ -1,29 +1,20 @@
 {% extends "base.html" %}
+{% load crispy_forms_filters %}
+
 {% block title %}
     <title> Login page </title>
 {% endblock title %}
 {% block content %}
-<form class="box" action="/accounts/login/" method="post">{% csrf_token %} 
-    <div class="field">
-        <label class="label" for="username">Username:</label><br>
-        <div class="control">
-        <input class="input" type="text" name="username"><br>
+    {% if not request.user.is_authenticated %}
+        <div style='margin-top:30px;'>
+            <form method='POST'>{% csrf_token %}
+                {{ form | crispy }}
+                <button type="submit" class="button is-primary">Sign In</button>
+            </form>
+            <p class="has-text-centered mt-3">Need an account? Please <a href="{% url 'accounts:register' %}">Register</a></p>
         </div>
-    </div>
-    <div class="field">
-        <label class="label" for="password">Password:</label><br>
-        <div class="contrl">
-        <input class="input" type="password" name="password"><br>
-        </div>
-    </div>
-
-    <button class="button is-link">Sign in</button>
-    <br />
-    <br />
-    <a href="/">Back to Home</a>
-</form>
-{% if error %}
-<p style="color:red;">{{ error }}</p>
-{% endif %}
+    {% else %}
+        <p>You're already logged in. Would you like to <a href="{% url 'accounts:logout' %}">Sign Out</a>?</p>
+    {% endif %}
 
 {% endblock content %}

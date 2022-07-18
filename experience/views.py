@@ -5,6 +5,7 @@ from .models import Experience
 from .forms import ExperienceForm
 # Create your views here.
 
+
 def exp_list_view(request):
     exp_list = Experience.objects.all()
     context = {
@@ -12,12 +13,14 @@ def exp_list_view(request):
     }
     return render(request, "experience/list.html", context=context)
 
+
 def exp_detail_view(request, id):
     obj = Experience.objects.get(id=id)
     context = {
         "object": obj
     }
     return render(request, "experience/detail.html", context=context)
+
 
 @login_required
 def exp_create_view(request):

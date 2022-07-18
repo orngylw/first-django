@@ -6,5 +6,5 @@
     <h1>Experience Detail: {{ object.job }}</h1>
     <p><b>{{ object.job }} {{ object.year }}</b></p>
     <p>{{ object.desc }}</p>
-    <p><a href="/exp"> Back to list </a></p>
+    <p><a href="{% url 'experience:list' %}"> Back to list </a></p>
 {% endblock content %}

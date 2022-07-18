@@ -1,11 +1,13 @@
 {% extends "base.html" %}
+{% load crispy_forms_filters %}
+
 {% block title %}
     <title> Create a Praise </title>
 {% endblock title %}
 {% block content %}
 {% if not created %}
 <form action="/praise/new/" method="post">{% csrf_token %} 
-    {{ form.as_p }}
+    {{ form | crispy }}
     <!-- <label for="name">곡명:</label><br>
     <input class="input is-link is-rounded" type="text" name="name" required><br>
     
@@ -40,11 +42,11 @@
     <br /> -->
     <input type="submit" value="Submit"><br>
     <br />
-    <a href="/praise/">Back to list</a>
+    <a href="{% url 'praises:list' %}">Back to list</a>
 </form>
 {% else %}
 <p>your input is submitted</p>
-<p><a href="/praise/{{ obj.id }}">{{ obj.name }} {{ obj.chord }}</a></p>
+<p><a href="{% url 'praises:detail' obj.id %}">{{ obj.name }} {{ obj.chord }}</a></p>
 {% endif %}
 {% endblock content %}
 

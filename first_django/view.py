@@ -22,6 +22,7 @@ def home_view(request):
     }
     return render(request, "home-view.html", context=context)
 
+
 def form_view(request):
     form_practice = render_to_string("form-view.html")
     return HttpResponse(form_practice)

@@ -4,7 +4,7 @@
 {% endblock title %}
 {% block content %}
 <div class="content">
-    <p style = text-align:right;><a class="button is-link is-light is-outlined is-rounded"  style=text-align:right; href="/exp/new/">Create</a></p>
+    <p style = text-align:right;><a class="button is-link is-light is-outlined is-rounded"  style=text-align:right; href="{% url 'experience:create' %}">Create</a></p>
     <h1>Experience</h1>
     <table class="table">
         <thead>
@@ -15,7 +15,7 @@
         </thead>
     {% for exp in experiences %}
             <tbody>
-                <th><a href="/exp/{{ exp.id }}">{{ exp.job }}</a></th>
+                <th><a href="{% url 'experience:detail' exp.id %}">{{ exp.job }}</a></th>
                 <th>{{ exp.year }}</th>
             </tbody>
     {% endfor %}
@@ -25,9 +25,9 @@
     <a class="button is-link is-light is-outlined is-rounded" href="/"> Homepage </a>
     <br />
     <br />
-    <a class="button is-link is-light is-outlined is-rounded" href="/courses"> Courses </a>
+    <a class="button is-link is-light is-outlined is-rounded" href="{% url 'courses:list' %}"> Courses </a>
     <br />
     <br />
-    <a class="button is-link is-light is-outlined is-rounded" href="/praise"> Praise </a>
+    <a class="button is-link is-light is-outlined is-rounded" href="{% url 'praises:list' %}"> Praise </a>
 </div>
 {% endblock content %}

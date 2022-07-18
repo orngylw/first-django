@@ -1,29 +1,28 @@
 {% extends "base.html" %}
+
 {% block title %}
     <title> Homepage </title>
 {% endblock title %}
 {% block content %}
 <div class="content">
-<p style = text-align:right;>
+<a style = text-align:right;>
     {% if request.user.is_authenticated %}
-    <a class="button is-danger is-light is-outlined is-rounded" style="text-align:right; margin-right:10px;" href="/accounts/logout">Sign out</a>
+    <a class="button is-danger is-light is-outlined is-rounded" style="text-align:right; margin-right:10px;" href="{% url 'accounts:logout' %}">Sign out</a>
+    <a class="button is-primary is-light is-outlined is-rounded" style="text-align:right; margin-right:10px;" href="{% url 'accounts:profile' %}">Profile Update</a>
     {% else %}
-    <a class="button is-link is-light is-outlined is-rounded" style="text-align:right; margin-right:10px;" href="/accounts/login">Sign in</a>
+    <a class="button is-link is-light is-outlined is-rounded" style="text-align:right; margin-right:10px;" href="{% url 'accounts:login' %}">Sign in</a>
     {% endif %}
-</p>
 
 <h1 style="text-align:center;">Junho's First Webpage</h1>
-<h1 style="text-align:center;">{{ welcome.title }}</h1>
-<p style="text-align:center;">{{ welcome.content }}</p>
-<p style="text-align:center;">Today's lucky number is ... {{ lucky_number }}!! Good luck!</p>
+
 </div>
 <br />
 <br />
-<a class="button is-link is-light is-outlined is-rounded" style="margin-left:45%;" href="/courses">Courses</a>
+<a class="button is-link is-light is-outlined is-rounded" style="margin-left:45%;" href="{% url 'courses:list' %}">Courses</a>
 <br />
 <br />
-<a class="button is-link is-light is-outlined is-rounded" style="margin-left:45%;" href="/exp">Experiences</a>
+<a class="button is-link is-light is-outlined is-rounded" style="margin-left:45%;" href="{% url 'experience:list' %}">Experiences</a>
 <br />
 <br />
-<a class="button is-link is-light is-outlined is-rounded" style="margin-left:45%;" href="/praise">Praise</a>
+<a class="button is-link is-light is-outlined is-rounded" style="margin-left:45%;" href="{% url 'praises:list' %}">Praise</a>
 {% endblock content %}

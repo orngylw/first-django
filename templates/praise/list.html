@@ -6,7 +6,7 @@
 {% block content %}
 <div class="content">
     <p style = text-align:right;>
-      <a class="button is-link is-light is-outlined is-rounded"  style=text-align:right; href="/praise/new/">Create</a>
+      <a class="button is-link is-light is-outlined is-rounded"  style=text-align:right; href="{% url 'praises:create' %}">Create</a>
     </p>
     <h1 style="text-align: center">찬양곡 모음</h1>
     {% if not month %}
@@ -22,14 +22,14 @@
         <div class="dropdown-menu" id="dropdown-menu" role="menu" style="margin-left:650px;">
           <div class="dropdown-content" style="text-align:center;">
             {% for praise_group in praises %}
-            <a href="/praise/list/{{ praise_group.date__month }}/" class="btn btn-success btn-sm">{{ praise_group.date__month }} 월</a>
+            <a href="{% url 'praises:month' praise_group.date__month %}" class="btn btn-success btn-sm">{{ praise_group.date__month }} 월</a>
             {% endfor %}
           </div>
         </div>
       </div>
     {% else %}
     <button class="button is-link" aria-haspopup="true" aria-controls="dropdown-menu" style="margin-left:45%;">{{ month }}월 찬양곡 모음{% if praises.exists %}<span style="margin-left: 5px;">({{ praises.count }})</span>{% endif %}</button>
-    <a style="margin-left:15px;" href="/praise">Back to list</a>
+    <a style="margin-left:15px;" href="{% url 'praises:list' %}">Back to list</a>
     <div class="content" style="display: block;">
         <table class="table">
             <thead>
@@ -42,12 +42,12 @@
         {% for praise in praises %}
                 <tbody>
                     <th>{{ praise.date }}</th>
-                    <th><a href="/praise/{{ praise.id }}">{{ praise.name }}</a></th>
+                    <th><a href="{% url 'praises:detail' praise.id %}">{{ praise.name }}</a></th>
                     <th>{{ praise.chord }}</th>
                 </tbody>
         {% endfor %}
         </table>
-        <a href="/praise">Back to list</a>
+        <a href="{% url 'praises:list' %}">Back to list</a>
     </div>
     {% endif %}
 
@@ -57,9 +57,9 @@
     <a class="button is-link is-light is-outlined is-rounded" style="margin-left:45%;" href="/"> Homepage </a>
     <br />
     <br />
-    <a class="button is-link is-light is-outlined is-rounded" style="margin-left:45%;"" href="/courses"> Courses </a>
+    <a class="button is-link is-light is-outlined is-rounded" style="margin-left:45%;"" href="{% url 'courses:list' %}"> Courses </a>
     <br />
     <br />
-    <a class="button is-link is-light is-outlined is-rounded" style="margin-left:45%;" href="/exp"> Experience </a>
+    <a class="button is-link is-light is-outlined is-rounded" style="margin-left:45%;" href="{% url 'experience:list' %}"> Experience </a>
 </div>
 {% endblock content %}

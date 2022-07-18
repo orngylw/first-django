@@ -6,6 +6,7 @@ from .models import Praise
 from .forms import PraiseForm
 # Create your views here.
 
+
 def praise_list_view(request, month=None):
     if month is None:
         praise_list = Praise.objects.values('date__month').annotate(total=Count('id'))
@@ -21,12 +22,14 @@ def praise_list_view(request, month=None):
         }
     return render(request, "praise/list.html", context=context)
 
+
 def praise_detail_view(request, id):
     obj = Praise.objects.get(id=id)    
     context = {
         "object": obj
     }
     return render(request, "praise/detail.html", context=context)
+
 
 @login_required
 def praise_create_view(request):

@@ -4,7 +4,7 @@
 {% endblock title %}
 {% block content %}
     <div class="content">
-    <p style = text-align:right;><a class="button is-link is-light is-outlined is-rounded"  style=text-align:right; href="/courses/new/">Create</a></p>
+    <p style = text-align:right;><a class="button is-link is-light is-outlined is-rounded"  style=text-align:right; href="{% url 'courses:create' %}">Create</a></p>
     <h1>Junho's Courses Taken at FSU</h1>
     <h2>Courses Taken</h2>
     <table class="table">
@@ -27,8 +27,8 @@
     <br /><br />
     <a class="button is-link is-light is-outlined is-rounded" href="/"> Homepage </a>
     <br /><br />
-    <a class="button is-link is-light is-outlined is-rounded" href="/exp"> Experiences </a>
+    <a class="button is-link is-light is-outlined is-rounded" href="{% url 'experience:list' %}"> Experiences </a>
     <br /><br />
-    <a class="button is-link is-light is-outlined is-rounded" href="/praise"> Praise </a>
+    <a class="button is-link is-light is-outlined is-rounded" href="{% url 'praises:list' %}"> Praise </a>
     </div>
 {% endblock content %}

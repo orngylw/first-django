@@ -8,5 +8,5 @@
     <p><b>Instructor:</b> {{ object.instructor }}</p>
     <p><b>Location:</b> {{ object.location }}</p>
     <p><b>Semester:</b> {{ object.semester }} {{ object.year }}</p>
-    <p><a href="/courses"> Back to list </a></p>
+    <p><a href="{% url 'courses:list' %}"> Back to list </a></p>
 {% endblock content %}

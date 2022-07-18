@@ -1,24 +1,21 @@
 {% extends "base.html" %}
+{% load crispy_forms_filters %}
+
 {% block title %}
     <title> User Profile Change </title>
 {% endblock title %}
 {% block content %}
-<form class="box" method="post">{% csrf_token %}
+    {% if request.user.is_authenticated %}
+        <div class="mt-3">
+            <p class="mb-3">USERNAME: {{ request.user.username }}</p>
+            <form method='POST'>{% csrf_token %}
+                {{ form | crispy }}
+                <button type='submit' class="button is-primary mt-3">Update</button>
+                <button class="button is-primary mt-3 ml-3"><a href="/">Homepage</a></button>
+            </form>
+        </div>
+    {% else %}
 
-    <label>Username:</label>
-    {{ form.username }}
-
-    <label>First name:</label>
-    {{ form.first_name }}
-    <label>Last name:</label>
-    {{ form.last_name }}
-    <label>Email address:</label>
-    {{ form.email }}
-
-    <br />
-    <button class="button is-link">Save and continue editing</button>
-    <br />
-    <a href="/">Back to Home</a>
-</form>
+    {% endif %}
 
 {% endblock content %}

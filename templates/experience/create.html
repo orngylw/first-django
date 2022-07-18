@@ -1,11 +1,13 @@
 {% extends "base.html" %}
+{% load crispy_forms_filters %}
+
 {% block title %}
     <title> Create a Experience </title>
 {% endblock title %}
 {% block content %}
 {% if not created %}
 <form action="/exp/new/" method="post">{% csrf_token %} 
-    {{ form.as_p }}
+    {{ form | crispy }}
     <!-- <label for="job">Job Position:</label><br>
     <input class="input is-link is-rounded" type="text" name="job" placeholder="ex) Graduate Assistance"><br>
     <label for="desc">Job Description:</label><br>
@@ -15,11 +17,11 @@
     <br /> -->
     <input type="submit" value="Submit"><br>
     <br />
-    <a href="/exp/">Back to list</a>
+    <a href="{% url 'experience:list' %}">Back to list</a>
 </form>
 {% else %}
 <p>your input is submitted</p>
-<p><a href="/exp/{{ obj.id }}">{{ obj.job }} {{ obj.year }}</a></p>
+<p><a href="{% url 'experience:detail' obj.id %}">{{ obj.job }} {{ obj.year }}</a></p>
 {% endif %}
 {% endblock content %}
 
