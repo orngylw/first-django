@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 
 # Create your views here.
-from accounts.forms import ProfileChangeForm
+# from accounts.forms import ProfileChangeForm
 
 
 def login_view(request):
@@ -50,23 +50,13 @@ def register_view(request):
 
 
 @login_required
-def profile_update_view(request, user_id):
-    user_obj = get_object_or_404(User, id=user_id)
+def profile_update_view(request):
+    user_obj = get_object_or_404(User, id=request.user.id)
     form = ProfileChangeForm(request.POST or None, instance=user_obj)
+
     if form.is_valid():
         user_obj = form.save()
         return redirect(f'/accounts/edit/{user_obj.id}')
+
     context = {"form": form}
     return render(request, "accounts/update.html", context)
-
-
-
-    # if request.user.is_authenticated:
-    #     logout(request)
-    #     return render(request, "accounts/logout.html", context={})
-    # else:
-    #     error = "You're not signed in. Please sign in first"
-    #     context = {
-    #         "error": error,
-    #     }
-    # return render(request, "accounts/logout.html", context=context)

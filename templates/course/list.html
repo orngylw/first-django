@@ -17,7 +17,8 @@
         </thead>
     {% for course in courses %}
             <tbody>
-                <th><a href="/courses/{{ course.id }}">{{ course.course }}</a></th>
+                <th><a href="{% url 'courses:detail' course.id %}">{{ course.course }}</a></th>
+{#                <th><a href="/courses/{{ course.id }}">{{ course.course }}</a></th>#}
                 <th>{{ course.subject }}</th>
                 <th>{{ course.grade }}</th>
             </tbody>
