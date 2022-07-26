@@ -3,6 +3,7 @@
     <title> Detail </title>
 {% endblock title %}
 {% block content %}
+    <a class="button is-link is-light is-outlined is-rounded"  style=text-align:right; href="{% url 'praises:edit' object.id %}">Edit</a>
     <h1>Praise Detail: {{ object.name }}</h1>
     <p style="font-weight: bolder;">악기구성: {{ object.instruments }}</p>
     <p><b>코드 및 키업:</b> {{ object.chord }} (키업: {{ object.key_up }})</p>

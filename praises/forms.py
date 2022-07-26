@@ -2,6 +2,7 @@ from django import forms
 
 from .models import Praise
 
+
 class PraiseForm(forms.ModelForm):
     def clean(self):
         data = self.cleaned_data

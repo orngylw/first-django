@@ -1,5 +1,6 @@
-from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404, render, redirect
+from django.urls import reverse
 
 from .models import Experience
 from .forms import ExperienceForm
@@ -36,6 +37,29 @@ def exp_create_view(request):
             created = True
         context["created"] = created
     return render(request, "experience/create.html", context=context)
+
+
+@login_required
+def exp_update_view(request, id):
+    exp_obj = get_object_or_404(Experience, id=id)
+
+    if request.method == 'POST':
+        form = ExperienceForm(request.POST)
+        if form.is_valid():
+            exp_obj.job = form.cleaned_data['job']
+            exp_obj.year = form.cleaned_data['year']
+            exp_obj.desc = form.cleaned_data['desc']
+            exp_obj.save()
+            return redirect(reverse("experience:list"))
+
+    else:
+        form = ExperienceForm(data={
+            'job': exp_obj.job,
+            'year': exp_obj.year,
+            'desc': exp_obj.desc,
+        })
+    return render(request, "experience/update.html", {"form": form})
+
     # if request.method == "POST":
     #     job = request.POST.get("job")
     #     desc = request.POST.get("desc")

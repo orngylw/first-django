@@ -1,8 +1,10 @@
 {% extends "base.html" %}
+
 {% block title %}
     <title> Detail </title>
 {% endblock title %}
 {% block content %}
+    <a class="button is-link is-light is-outlined is-rounded"  style=text-align:right; href="{% url 'experience:edit' object.id %}">Edit</a>
     <h1>Experience Detail: {{ object.job }}</h1>
     <p><b>{{ object.job }} {{ object.year }}</b></p>
     <p>{{ object.desc }}</p>

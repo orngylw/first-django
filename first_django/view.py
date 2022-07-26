@@ -8,6 +8,8 @@ from experience.models import Experience
 from course.models import Course
 from praises.models import Praise
 
+from .utils import process_modal_vars
+
 import random
 import datetime
 
@@ -19,6 +21,9 @@ def home_view(request):
     context = {
         "lucky_number": lucky_number,
         "welcome": welcome,
+        "modal": process_modal_vars(
+            "Modal Title", "Do you want to delete?", "YES",
+        )
     }
     return render(request, "home-view.html", context=context)
 

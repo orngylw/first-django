@@ -1,0 +1,26 @@
+{% load crispy_forms_filters %}
+
+<div id="modal-js-example" class="modal">
+    <div class="modal-background">
+    </div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">{{ modal.modal_title }}</p>
+            <button class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+            <div>
+                <form method='POST' action="{{ modal.form_action }}">{% csrf_token %}
+                    {% if form %}
+                    {{ form | crispy }}
+                    {% endif %}
+                    {% if modal.modal_content %}
+                    {{ modal.modal_content }}
+                    {% endif %}
+                    <br />
+                    <button type='submit' class="button is-primary mt-3">{{ modal.modal_submit_label }}</button>
+                </form>
+            </div>
+        </section>
+    </div>
+</div>
