@@ -8,3 +8,10 @@ def process_modal_vars(title, content, label, url=None):
         "form_action": url,
     }
 
+
+def process_form_vars(label, back_url=None, action_url="."):
+    return {
+        "form_submit_label": label,
+        "form_reverse": back_url,
+        "form_action": action_url,
+    }

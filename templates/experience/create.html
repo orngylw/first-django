@@ -4,28 +4,15 @@
 {% block title %}
     <title> Create a Experience </title>
 {% endblock title %}
+
 {% block content %}
+
 {% if not created %}
-<form action="/exp/new/" method="post">{% csrf_token %} 
-    {{ form | crispy }}
-    <!-- <label for="job">Job Position:</label><br>
-    <input class="input is-link is-rounded" type="text" name="job" placeholder="ex) Graduate Assistance"><br>
-    <label for="desc">Job Description:</label><br>
-    <input class="input is-link is-rounded" type="text" name="desc" placeholder="ex) Assist lead instructor ..."><br>
-    <label for="year">Year:</label><br>
-    <input class="input is-link is-rounded" type="text" name="year" placeholder="ex) 2018-2020 or 2020-present"><br>
-    <br /> -->
-    <input type="submit" value="Submit"><br>
-    <br />
-    <a href="{% url 'experience:list' %}">Back to list</a>
-</form>
+{% include "generic-form.html" %}
+
 {% else %}
 <p>your input is submitted</p>
 <p><a href="{% url 'experience:detail' obj.id %}">{{ obj.job }} {{ obj.year }}</a></p>
 {% endif %}
+
 {% endblock content %}
-
-
-<!-- job = models.TextField()
-year = models.TextField()
-desc = models.TextField() -->

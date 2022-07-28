@@ -4,7 +4,7 @@ from django.urls import reverse
 
 from .models import Course
 from .forms import CourseForm
-from first_django.utils import process_modal_vars
+from first_django.utils import process_modal_vars, process_form_vars
 
 
 # Create your views here.
@@ -35,6 +35,7 @@ def course_create_view(request):
     form = CourseForm(request.POST or None)
     context = {
         "form": form,
+        "generic_form": process_form_vars("Create", reverse("courses:list"))
     }
     if form.is_valid():
         obj = form.save()
@@ -50,7 +51,9 @@ def course_create_view(request):
 @login_required
 def course_update_view(request, id):
     course_obj = get_object_or_404(Course, id=id)
-
+    context = {
+        "generic_form": process_form_vars("Update", reverse("courses:list"), reverse("courses:edit", kwargs={"id": id}))
+    }
     if request.method == 'POST':
         form = CourseForm(request.POST)
         if form.is_valid():
@@ -76,7 +79,8 @@ def course_update_view(request, id):
             'year': course_obj.year or None,
             'credit': course_obj.credit,
         })
-    return render(request, "course/update.html", {"form": form})
+        context["form"] = form
+    return render(request, "course/update.html", context=context)
 
 
 @login_required
@@ -85,18 +89,3 @@ def course_delete_view(request, id):
         course_obj = get_object_or_404(Course, id=id)
         course_obj.delete()
         return redirect(reverse("courses:list"))
-
-
-    # if request.method == "POST":
-    #     course = request.POST.get("course")
-    #     subject = request.POST.get("subject")
-    #     location = request.POST.get("location")
-    #     obj = Course.objects.create(course=course, subject=subject, location=location)
-    #     created = False
-    #     if obj is not None:
-    #         created = True
-    #     context = {
-    #         "obj": obj,
-    #         "created": created
-    #     }
-    #     return render(request, "course/create.html", context=context)

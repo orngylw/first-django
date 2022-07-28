@@ -4,6 +4,7 @@ from django.urls import reverse
 
 from .models import Experience
 from .forms import ExperienceForm
+from first_django.utils import process_modal_vars, process_form_vars
 # Create your views here.
 
 
@@ -18,7 +19,11 @@ def exp_list_view(request):
 def exp_detail_view(request, id):
     obj = Experience.objects.get(id=id)
     context = {
-        "object": obj
+        "object": obj,
+        "modal": process_modal_vars(
+            "Delete Confirmation", "Do you want to delete this content?", "Yes", reverse("experience:delete",
+                                                                                         kwargs={"id": id})
+        )
     }
     return render(request, "experience/detail.html", context=context)
 
@@ -28,7 +33,9 @@ def exp_create_view(request):
     form = ExperienceForm(request.POST or None)
     context = {
         "form": form,
+        "generic_form": process_form_vars("Create", reverse("experience:list"))
     }
+
     if form.is_valid():
         obj = form.save()
         context["obj"] = obj
@@ -42,6 +49,10 @@ def exp_create_view(request):
 @login_required
 def exp_update_view(request, id):
     exp_obj = get_object_or_404(Experience, id=id)
+    context= {
+        "generic_form": process_form_vars(label="Update", back_url=reverse("experience:list"),
+                                          actio_url=reverse("experience:edit", kwargs={"id": id}))
+    }
 
     if request.method == 'POST':
         form = ExperienceForm(request.POST)
@@ -58,7 +69,16 @@ def exp_update_view(request, id):
             'year': exp_obj.year,
             'desc': exp_obj.desc,
         })
-    return render(request, "experience/update.html", {"form": form})
+        context["form"] = form
+    return render(request, "experience/update.html", context=context)
+
+
+@login_required
+def exp_delete_view(request, id):
+    if request.method == "POST":
+        exp_obj = get_object_or_404(Experience, id=id)
+        exp_obj.delete()
+        return redirect(reverse("experience:list"))
 
     # if request.method == "POST":
     #     job = request.POST.get("job")

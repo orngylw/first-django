@@ -7,6 +7,7 @@ from django.urls import reverse
 
 from .models import Praise
 from .forms import PraiseForm
+from first_django.utils import process_modal_vars, process_form_vars
 # Create your views here.
 
 
@@ -30,7 +31,11 @@ def praise_list_view(request, month=None):
 def praise_detail_view(request, id):
     obj = Praise.objects.get(id=id)    
     context = {
-        "object": obj
+        "object": obj,
+        "modal": process_modal_vars(
+            "Delete Confirmation", "Do you want to delete this content?", "Yes", reverse("praises:delete",
+                                                                                         kwargs={"id": id})
+        )
     }
     return render(request, "praise/detail.html", context=context)
 
@@ -40,7 +45,9 @@ def praise_create_view(request):
     form = PraiseForm(request.POST or None)
     context = {
         "form": form,
+        "generic_form": process_form_vars("Create", reverse("praises:list"))
     }
+
     if form.is_valid():
         obj = form.save()
         context["obj"] = obj
@@ -54,6 +61,9 @@ def praise_create_view(request):
 @login_required
 def praise_update_view(request, id):
     praise_obj = get_object_or_404(Praise, id=id)
+    context= {
+        "generic_form": process_form_vars("Update", reverse("praises:list"), reverse("praises:edit", kwargs={"id": id}))
+    }
 
     if request.method == 'POST':
         form = PraiseForm(request.POST)
@@ -76,26 +86,15 @@ def praise_update_view(request, id):
             'date': praise_obj.date,
             'note': praise_obj.note or None,
         })
-    return render(request, "praise/update.html", {"form": form})
+        context["form"] = form
+    return render(request, "praise/update.html", context=context)
 
 
+@login_required
+def praise_delete_view(request, id):
+    if request.method == "POST":
+        praise_obj = get_object_or_404(Praise, id=id)
+        praise_obj.delete()
+        return redirect(reverse("praises:list"))
 
-
-    # if request.method == "POST":
-    #     name = request.POST.get("name")
-    #     date = request.POST.get("date")
-    #     chord = request.POST.get("chord")
-    #     key_up = request.POST.get("key_up")
-    #     obj = Praise.objects.create(name=name, date=date, chord=chord, key_up=key_up)
-        
-    #     created = False
-    
-    #     if obj is not None:
-    #         created = True
-    #     context = {
-    #         "obj": obj,
-    #         "created": created
-    #     }
-    #     return render(request, "praise/create.html", context=context)
-    
 

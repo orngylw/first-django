@@ -4,41 +4,14 @@
 {% block title %}
     <title> Create a Course </title>
 {% endblock title %}
+
 {% block content %}
 
-
 {% if not created %}
-<form action="/courses/new/" method="post">{% csrf_token %} 
-    {{ form | crispy }}
-    <!-- <label for="course">Course number:</label><br>
-    <input type="text" id="course" name="course" placeholder="ex) SED 5346"><br>
-    <label for="subject">Course name:</label><br>
-    <input type="text" id="subject" name="subject" placeholder="ex) Teaching Oral Comm"><br>
-    <label for="location">Location:</label><br>
-    <input type="text" id="location" name="location" placeholder="ex) UCC 4400 or Online"><br>
-    <br /> -->
-    <input type="submit" value="Submit"><br>
-    <br />
-    <a href="{% url 'courses:list' %}">Back to list</a>
-</form>
+    {% include "generic-form.html" %}
 {% else %}
 <p>your input is submitted</p>
 <p><a href="{% url 'courses:detail' obj.id %}">{{ obj.course }} {{ obj.subject }} {{ obj.location }}</a></p>
 {% endif %}
+
 {% endblock content %}
-
-
-<!-- class Course(models.Model):
-    semester_list = (
-        ('Fall', 'Fall'),
-        ('Summer', 'Summer'),
-        ('Spring', 'Spring'),
-    )
-    course = models.TextField()
-    subject = models.TextField()
-    grade = models.TextField()
-    location = models.CharField(max_length=50, blank=True)
-    credit = models.IntegerField(default=3)
-    instructor = models.CharField(max_length=30, blank=True)
-    semester = models.CharField(max_length=6, choices=semester_list, blank=True)
-    year = models.IntegerField(default=2022) -->

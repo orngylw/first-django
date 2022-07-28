@@ -4,14 +4,14 @@
 {% endblock title %}
 {% block content %}
     <a class="button is-primary is-rounded"  style=text-align:right; href="{% url 'courses:edit' object.id %}">Edit</a>
-    <button class="button is-danger is-rounded js-modal-trigger" data-target="modal-js-example">
-    Delete
-    </button>
+    <button class="button is-danger is-rounded js-modal-trigger" data-target="modal-js-example">Delete</button>
+
     <h1>Course Detail: {{ object.subject }}</h1>
     <p><b>{{ object.course }} {{ object.subject }} {{ object.grade }} (Credit: {{ object.credit }})</b></p>
     <p><b>Instructor:</b> {{ object.instructor }}</p>
     <p><b>Location:</b> {{ object.location }}</p>
     <p><b>Semester:</b> {{ object.semester }} {{ object.year }}</p>
     <p><a href="{% url 'courses:list' %}"> Back to list </a></p>
+
     {% include "form-modal.html" %}
 {% endblock content %}

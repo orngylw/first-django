@@ -17,12 +17,10 @@ from django.contrib import admin
 from django.urls import path, include
 
 from .view import home_view
-from .view import form_view
 
 
 urlpatterns = [
     path('', home_view, name='home'),
-    path('form/', form_view, name='form_view'),
     path('accounts/', include(('accounts.urls', 'accounts'), namespace='accounts')),
     path('courses/', include(('course.urls', 'course'), namespace='courses')),
     path('exp/', include(('experience.urls', 'experience'), namespace='experiences')),

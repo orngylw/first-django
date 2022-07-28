@@ -17,7 +17,7 @@ import datetime
 def home_view(request):
     numb = random.randint(5, 8)
     lucky_number = random.randint(1, 2022)
-    welcome=Article.objects.get(id=numb)
+    welcome = Article.objects.get(id=numb)
     context = {
         "lucky_number": lucky_number,
         "welcome": welcome,
@@ -26,8 +26,3 @@ def home_view(request):
         )
     }
     return render(request, "home-view.html", context=context)
-
-
-def form_view(request):
-    form_practice = render_to_string("form-view.html")
-    return HttpResponse(form_practice)

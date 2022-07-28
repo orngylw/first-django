@@ -4,72 +4,15 @@
 {% block title %}
     <title> Create a Praise </title>
 {% endblock title %}
-{% block content %}
-{% if not created %}
-<form action="/praise/new/" method="post">{% csrf_token %} 
-    {{ form | crispy }}
-    <!-- <label for="name">곡명:</label><br>
-    <input class="input is-link is-rounded" type="text" name="name" required><br>
-    
-    <label for="chord">코드:</label>
-    <div class="select is-link">
-        <select name="chord" id="chord">
-            <option value="C">C</option>
-            <option value="D">D</option>
-            <option value="Eb">Eb</option>
-            <option value="E">E</option>
-            <option value="F">F</option>
-            <option value="G">G</option>
-            <option value="A">A</option>
-            <option value="Bb">Bb</option>
-            <option value="B">B</option>
-        </select>
-    </div>
-    <br>
 
-    <label for="key_up">키업 유무:</label>
-    <div class="select is-link">
-        <select name="key_up" id="key_up" required>
-            <option value="O">O</option>
-            <option value="X">X</option>
-        </select>
-    </div>
-    <br>
-    <label for="date">날짜</label><br>
-    <input class="input is-link is-rounded" type="date" name="date" value="2022-01-01" min="1999-01-01" max="2060-01-01"><br>
-    <label for="note">특이사항:</label><br>
-    <input class="input is-link is-rounded" type="text" name="note" placeholder="ex) 헌금찬양 ..."><br>
-    <br /> -->
-    <input type="submit" value="Submit"><br>
-    <br />
-    <a href="{% url 'praises:list' %}">Back to list</a>
-</form>
+{% block content %}
+
+{% if not created %}
+{% include "generic-form.html" %}
+
 {% else %}
 <p>your input is submitted</p>
 <p><a href="{% url 'praises:detail' obj.id %}">{{ obj.name }} {{ obj.chord }}</a></p>
 {% endif %}
+
 {% endblock content %}
-
-
-<!-- chord_list=(
-    ('C', 'C'),
-    ('D', 'D'),
-    ('Eb', 'Eb'),
-    ('E', 'E'),
-    ('F', 'F'),
-    ('G', 'G'),
-    ('A', 'A'),
-    ('Bb', 'Bb'),
-    ('B', 'B'),
-)
-answer = (
-    ('X', 'No'),
-    ('O', 'Yes'),
-)
-name = models.TextField()
-img_path = models.TextField(blank=True)
-instruments = models.TextField()
-chord = models.CharField(max_length=3, choices=chord_list, blank=True)
-key_up = models.CharField(max_length=3, choices=answer, default='X')
-date = models.DateField(default=timezone.now)
-note = models.CharField(max_length=256, blank=True) -->

@@ -3,10 +3,15 @@
 {% block title %}
     <title> Detail </title>
 {% endblock title %}
+
 {% block content %}
-    <a class="button is-link is-light is-outlined is-rounded"  style=text-align:right; href="{% url 'experience:edit' object.id %}">Edit</a>
+    <a class="button is-primary is-rounded"  style=text-align:right; href="{% url 'experience:edit' object.id %}">Edit</a>
+    <button class="button is-danger is-rounded js-modal-trigger" data-target="modal-js-example">Delete</button>
+
     <h1>Experience Detail: {{ object.job }}</h1>
     <p><b>{{ object.job }} {{ object.year }}</b></p>
     <p>{{ object.desc }}</p>
     <p><a href="{% url 'experience:list' %}"> Back to list </a></p>
+
+    {% include "form-modal.html" %}
 {% endblock content %}
