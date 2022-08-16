@@ -12,4 +12,5 @@ urlpatterns = [
     path('delete/<int:id>/', praise_delete_view, name='delete'),
     path('<int:id>/', praise_detail_view, name='detail'),
     path('list/<int:month>/', praise_list_view, name='month'),
+
 ]

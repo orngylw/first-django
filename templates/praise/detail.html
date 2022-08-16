@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+
 {% block title %}
     <title> Detail </title>
 {% endblock title %}
@@ -6,13 +7,25 @@
     <a class="button is-primary is-rounded"  style=text-align:right; href="{% url 'praises:edit' object.id %}">Edit</a>
     <button class="button is-danger is-rounded js-modal-trigger" data-target="modal-js-example">Delete</button>
 
-    <h1>Praise Detail: {{ object.name }}</h1>
-    <p style="font-weight: bolder;">악기구성: {{ object.instruments }}</p>
+    <p><b>Praise Detail:</b> {{ object.name }}</p>
+    <p><b>악기구성:</b> {{ object.instruments }}</p>
     <p><b>코드 및 키업:</b> {{ object.chord }} (키업: {{ object.key_up }})</p>
     <p><b>날짜: </b>{{ object.date}} </p>
     <p><b>Note: </b>{{ object.note }}</p>
-    <p>악보 다운로드</p>
-
+    {% if object.image %}
+    <figure class="image is-fullwidth">
+        <img src="{{ object.image.url }}">
+    </figure>
+    {% endif %}
+    {% if object.file %}
+    <p><b>File:</b> <a href="{{ object.file.url }}/">{{ object.print_file_name }}</a></p>
+    {% endif %}
+    <div>
+        <p><b>Tags:</b></p>
+        {% for tag in object.tags.all %}
+            <span class="tag {{ tag.get_bulma_color_class }}"><a href="/praise?tag={{ tag.name }}">{{ tag.name }}</a></span>
+        {% endfor %}
+    </div>
     <p><a href="{% url 'praises:list' %}"> Back to list </a></p>
 
     {% include "form-modal.html" %}
