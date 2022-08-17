@@ -2,3 +2,7 @@
 /bin/
 /lib/
 .env
+db.sqlite3
+/static/
+/media/
+/.idea/
